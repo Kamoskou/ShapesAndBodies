@@ -1,7 +1,7 @@
 package main.java.shapesandbodies.shapes;
 
 public class Triangle implements Shape {
-    private double sideA;
+    private final double sideA;
     private final double sideB;
     private final double sideC;
 
@@ -25,5 +25,11 @@ public class Triangle implements Shape {
     @Override
     public String getType() {
         return "треугольник";
+    }
+
+    @Override
+    public void print() {
+        System.out.printf("это фигура - %s с периметром %.2f и площадью %.2f%n",
+                getType(), getPerimeter(), getArea());
     }
 }

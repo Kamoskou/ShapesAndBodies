@@ -18,62 +18,55 @@ public class BodyCalculator {
             int choice = ui.getMenuChoice(bodies.length);
 
             if (choice == -1) {
-                ui.print("Возврат в главное меню...");
-                return;  // выход из метода run(), возврат в main
+                System.out.println("Возврат в главное меню...");
+                return;
             }
 
             Body body = createBody(choice);
-            if (body != null) {
-                ui.printSeparator();
-                String result = String.format("это тело - %s с объёмом %.2f",
-                        body.getType(), body.getVolume());
-                ui.print(result);
-                ui.printSeparator();
-            }
 
-            // Спрашиваем только после успешного вычисления
-            if (!ui.askToContinue()) {
-                ui.print("Возврат в главное меню...");
-                return;
+            if (body != null) {
+                System.out.println();
+                body.print();
+                System.out.println();
+
+                if (!ui.askToContinue()) {
+                    System.out.println("Возврат в главное меню...");
+                    return;
+                }
             }
-            ui.printSeparator();
         }
     }
 
     private Body createBody(int choice) {
         switch (choice) {
-            case 1:
-                return createCube();
-            case 2:
-                return createCylinder();
-            case 3:
-                return createCone();
-            default:
-                return null;
+            case 1: return createCube();
+            case 2: return createCylinder();
+            case 3: return createCone();
+            default: return null;
         }
     }
 
     private Cube createCube() {
-        ui.print("\n--- КУБ ---");
-        double side = ui.readDouble("Введите сторону куба: ");
+        System.out.println("\nВведите сторону куба:");
+        double side = ui.readDouble("  сторона: ");
         if (side == -1) return null;
         return new Cube(side);
     }
 
     private Cylinder createCylinder() {
-        ui.print("\n--- ЦИЛИНДР ---");
-        double radius = ui.readDouble("Введите радиус: ");
+        System.out.println("\nВведите параметры цилиндра:");
+        double radius = ui.readDouble("  радиус: ");
         if (radius == -1) return null;
-        double height = ui.readDouble("Введите высоту: ");
+        double height = ui.readDouble("  высота: ");
         if (height == -1) return null;
         return new Cylinder(radius, height);
     }
 
     private Cone createCone() {
-        ui.print("\n--- КОНУС ---");
-        double radius = ui.readDouble("Введите радиус: ");
+        System.out.println("\nВведите параметры конуса:");
+        double radius = ui.readDouble("  радиус: ");
         if (radius == -1) return null;
-        double height = ui.readDouble("Введите высоту: ");
+        double height = ui.readDouble("  высота: ");
         if (height == -1) return null;
         return new Cone(radius, height);
     }

@@ -18,19 +18,16 @@ public class ConsoleUI {
     }
 
     public void printError(String message) {
-        System.err.println("Ошибка: " + message);
-    }
-
-    public void printSeparator() {
-        System.out.println("---");
+        System.err.println(message);
     }
 
     public void printMenu(String title, String[] items) {
-        System.out.println("\n=== " + title + " ===");
+        System.out.println();
+        System.out.println(title + ":");
         for (int i = 0; i < items.length; i++) {
-            System.out.println("  " + (i + 1) + " - " + items[i]);
+            System.out.println("  " + (i + 1) + ". " + items[i]);
         }
-        System.out.print("Ваш выбор (1-" + items.length + ", или 'exit'): ");
+        System.out.print("Выберите вариант (1-" + items.length + ", или exit): ");
     }
 
     public int getMenuChoice(int max) {
@@ -44,9 +41,9 @@ public class ConsoleUI {
                 if (choice >= 1 && choice <= max) {
                     return choice;
                 }
-                printError("Введите число от 1 до " + max);
+                System.out.println("  Ошибка: введите число от 1 до " + max);
             } catch (NumberFormatException e) {
-                printError("Введите число или 'exit'");
+                System.out.println("  Ошибка: введите число или exit");
             }
         }
     }
@@ -61,12 +58,12 @@ public class ConsoleUI {
             try {
                 double value = Double.parseDouble(input);
                 if (value <= 0) {
-                    printError("Значение должно быть больше 0");
+                    System.out.println("  Ошибка: значение должно быть больше 0");
                     continue;
                 }
                 return value;
             } catch (NumberFormatException e) {
-                printError("Введите число (например: 5.5)");
+                System.out.println("  Ошибка: введите число");
             }
         }
     }
@@ -81,7 +78,7 @@ public class ConsoleUI {
             if (answer.equals("n") || answer.equals("no")) {
                 return false;
             }
-            printError("Введите y или n");
+            System.out.println("  Ошибка: введите y или n");
         }
     }
 

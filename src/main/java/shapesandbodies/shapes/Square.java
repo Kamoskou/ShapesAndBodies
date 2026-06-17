@@ -21,4 +21,10 @@ public class Square implements Shape {
     public String getType() {
         return "квадрат";
     }
+
+    @Override
+    public void print() {
+        System.out.printf("это фигура - %s с периметром %.2f и площадью %.2f%n",
+                getType(), getPerimeter(), getArea());
+    }
 }

@@ -18,4 +18,10 @@ public class Cone implements Body {
     public String getType() {
         return "конус";
     }
+
+    @Override
+    public void print() {
+        System.out.printf("это тело - %s с объёмом %.2f%n",
+                getType(), getVolume());
+    }
 }

@@ -18,52 +18,45 @@ public class ShapeCalculator {
             int choice = ui.getMenuChoice(shapes.length);
 
             if (choice == -1) {
-                ui.print("Возврат в главное меню...");
-                return;  // выход из метода run(), возврат в main
+                System.out.println("Возврат в главное меню...");
+                return;
             }
 
             Shape shape = createShape(choice);
-            if (shape != null) {
-                ui.printSeparator();
-                String result = String.format("это фигура - %s с периметром %.2f и площадью %.2f",
-                        shape.getType(), shape.getPerimeter(), shape.getArea());
-                ui.print(result);
-                ui.printSeparator();
-            }
 
-            // Спрашиваем только после успешного вычисления
-            if (!ui.askToContinue()) {
-                ui.print("Возврат в главное меню...");
-                return;
+            if (shape != null) {
+                System.out.println();
+                shape.print();
+                System.out.println();
+
+                if (!ui.askToContinue()) {
+                    System.out.println("Возврат в главное меню...");
+                    return;
+                }
             }
-            ui.printSeparator();
         }
     }
 
     private Shape createShape(int choice) {
         switch (choice) {
-            case 1:
-                return createTriangle();
-            case 2:
-                return createSquare();
-            case 3:
-                return createTrapezoid();
-            default:
-                return null;
+            case 1: return createTriangle();
+            case 2: return createSquare();
+            case 3: return createTrapezoid();
+            default: return null;
         }
     }
 
     private Triangle createTriangle() {
-        ui.print("\n--- ТРЕУГОЛЬНИК ---");
-        double a = ui.readDouble("Введите сторону a: ");
+        System.out.println("\nВведите стороны треугольника:");
+        double a = ui.readDouble("  сторона a: ");
         if (a == -1) return null;
-        double b = ui.readDouble("Введите сторону b: ");
+        double b = ui.readDouble("  сторона b: ");
         if (b == -1) return null;
-        double c = ui.readDouble("Введите сторону c: ");
+        double c = ui.readDouble("  сторона c: ");
         if (c == -1) return null;
 
         if (a + b <= c || a + c <= b || b + c <= a) {
-            ui.printError("Треугольник с такими сторонами не существует");
+            System.out.println("  Ошибка: треугольник с такими сторонами не существует");
             return null;
         }
 
@@ -71,23 +64,23 @@ public class ShapeCalculator {
     }
 
     private Square createSquare() {
-        ui.print("\n--- КВАДРАТ ---");
-        double side = ui.readDouble("Введите сторону квадрата: ");
+        System.out.println("\nВведите сторону квадрата:");
+        double side = ui.readDouble("  сторона: ");
         if (side == -1) return null;
         return new Square(side);
     }
 
     private Trapezoid createTrapezoid() {
-        ui.print("\n--- ТРАПЕЦИЯ ---");
-        double baseA = ui.readDouble("Введите первое основание: ");
+        System.out.println("\nВведите параметры трапеции:");
+        double baseA = ui.readDouble("  первое основание: ");
         if (baseA == -1) return null;
-        double baseB = ui.readDouble("Введите второе основание: ");
+        double baseB = ui.readDouble("  второе основание: ");
         if (baseB == -1) return null;
-        double height = ui.readDouble("Введите высоту: ");
+        double height = ui.readDouble("  высота: ");
         if (height == -1) return null;
-        double sideC = ui.readDouble("Введите боковую сторону c: ");
+        double sideC = ui.readDouble("  боковая сторона c: ");
         if (sideC == -1) return null;
-        double sideD = ui.readDouble("Введите боковую сторону d: ");
+        double sideD = ui.readDouble("  боковая сторона d: ");
         if (sideD == -1) return null;
 
         return new Trapezoid(baseA, baseB, height, sideC, sideD);

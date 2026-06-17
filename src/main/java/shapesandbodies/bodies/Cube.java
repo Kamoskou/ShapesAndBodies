@@ -16,4 +16,10 @@ public class Cube implements Body {
     public String getType() {
         return "куб";
     }
+
+    @Override
+    public void print() {
+        System.out.printf("это тело - %s с объёмом %.2f%n",
+                getType(), getVolume());
+    }
 }

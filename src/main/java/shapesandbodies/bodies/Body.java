@@ -1,6 +1,8 @@
 package main.java.shapesandbodies.bodies;
 
-public interface Body {
+import main.java.shapesandbodies.Printable;
+
+public interface Body extends Printable {
     double getVolume();
     String getType();
 }
